@@ -11,7 +11,7 @@ Automatic Gene Selection (for bulk deconvolution)
 
 ## Installation
 git clone https://github.com/theislab/AutoGeneS<br/>
-pip install --user package/v0.9.1/dist/autogenes-0.9.1-py3-none-any.whl<br/>
+pip install --user dist/autogenes-0.9.1-py3-none-any.whl<br/>
 
 ## Testing
 import numpy as np<br/>
@@ -20,4 +20,4 @@ ag = AutoGenes(np.identity(2))<br/>
 
 ## Examples
 
-Find examples here: "AutoGeneS/v0.9.1/jupyter"
+Find examples here: "jupyter"
