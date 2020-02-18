@@ -20,4 +20,5 @@ ag = AutoGenes(np.identity(2))<br/>
 
 ## Examples
 
-Find examples here: "jupyter"
+Simple examples for how to call AutoGeneS can be find in folder "jupyter"
+Bulk deconvolution of synthetic bulks using single-cell reference profiles can be find in folder "deconv_example"
