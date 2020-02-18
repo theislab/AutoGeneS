@@ -32,6 +32,7 @@ class GeneticAlgorithm:
     self.objectives_names = kwargs['objectives_names']
 
     self.ngen = kwargs['ngen']
+    MU_PARAMETER = kwargs['nMU']
     self.verbose = kwargs['verbose']
 
     self._ncx = 0

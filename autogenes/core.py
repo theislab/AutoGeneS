@@ -43,7 +43,7 @@ class AutoGenes:
     self.__has_run = False
     self.__selection = None
 
-  def run(self, ngen=2, mode='standard', nfeatures=None, weights=None, objectives=None, seed=0, verbose=True):
+  def run(self, nMU=100, ngen=2, mode='standard', nfeatures=None, weights=None, objectives=None, seed=0, verbose=True):
 
     if not isinstance(ngen, int) or ngen < 0:
       raise ValueError("Invalid ngen")
@@ -115,6 +115,7 @@ class AutoGenes:
 
     self.ga = GeneticAlgorithm(
         data=self.data, 
+        nMU=nMU,
         ngen=ngen,
         mode=mode,
         weights=weights, 
