@@ -5,7 +5,7 @@ Automatic Gene Selection (for bulk deconvolution)
 ## Dependencies
 
 * python >=3.6
-* anndata
+* dill
 * deap
 * cachetools
 
