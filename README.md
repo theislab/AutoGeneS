@@ -25,18 +25,24 @@ We recommend to perform the optimization on 4,000-5,000 highly variable genes.
 ```python
 from autogenes import AutoGenes<br/>
 ag = AutoGenes(centroids_hv.T)<br/>
-ag.run(ngen=5000,seed=0,nfeatures=400,mode='fixed') #ngen is the number of optimization runs and nfeatures is the number of marker genes we are interested in```<br/>
+ag.run(ngen=5000,seed=0,nfeatures=400,mode='fixed') #ngen is the number of optimization runs and nfeatures is the number of marker genes we are interested in
+```
 
 The pareto front solutions are then accessible as follows:<br/>
 ```python
-pareto = ag.pareto<br/```>  
+pareto = ag.pareto
+``` 
 
 We then pick one solution and filter its corresponding marker genes:<br/>
+```python
 centroids_pareto = centroids_hv[pareto[len(pareto)-1]] #here we select the solution with min correlation
+``` 
 
 For deconvolution, bulk RNA samples are first normalized and filtered for the same marker genes. The deconvolution is then performed as follows:
+```python
 regr_NuSVR = NuSVR(nu=0.5,C=0.5,kernel='linear') 
 regr_NuSVR.fit(centroids_pareto, bulk_pareto)
+``` 
 
 Later, regr_NuSVR.coef_[0] returns the proportions which should be normalized to sum to one. 
 
