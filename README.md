@@ -46,7 +46,7 @@ regr_NuSVR = NuSVR(nu=0.5,C=0.5,kernel='linear')
 regr_NuSVR.fit(centroids_pareto, bulk_pareto)
 ``` 
 
-Later, ```pythonregr_NuSVR.coef_[0]``` returns the proportions which should be normalized to sum to one. 
+Later, ```regr_NuSVR.coef_[0]``` returns the proportions which should be normalized to sum to one. 
 
 ## Example Notebooks
 
