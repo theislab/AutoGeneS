@@ -14,17 +14,19 @@ git clone https://github.com/theislab/AutoGeneS<br/>
 pip install --user dist/autogenes-0.9.1-py3-none-any.whl<br/>
 
 ## Testing
-import numpy as np<br/>
-from autogenes import AutoGenes<br/>
-ag = AutoGenes(np.identity(2))<br/>
+```python
+import numpy as np
+from autogenes import AutoGenes
+ag = AutoGenes(np.identity(2))
+```
 
 ## Usage
 The normalized reference profiles filtered for highly variable genes are given as input to AutoGeneS as numpy array or panda dataframe with the format: genes x cell_types.
 We recommend to perform the optimization on 4,000-5,000 highly variable genes.
 
 ```python
-from autogenes import AutoGenes<br/>
-ag = AutoGenes(centroids_hv.T)<br/>
+from autogenes import AutoGenes
+ag = AutoGenes(centroids_hv.T)
 ag.run(ngen=5000,seed=0,nfeatures=400,mode='fixed') #ngen is the number of optimization runs and nfeatures is the number of marker genes we are interested in
 ```
 
