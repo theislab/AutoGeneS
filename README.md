@@ -21,12 +21,12 @@ ag = AutoGenes(np.identity(2))
 ```
 
 ## Usage
-The normalized reference profiles filtered for highly variable genes are given as input to AutoGeneS as numpy array or panda dataframe with the format: genes x cell_types.
+The normalized reference profiles filtered for highly variable genes are given as input to AutoGeneS as numpy array or panda dataframe with the format: cell_types x genes.
 We recommend to perform the optimization on 4,000-5,000 highly variable genes.
 
 ```python
 from autogenes import AutoGenes
-ag = AutoGenes(centroids_hv.T)
+ag = AutoGenes(centroids_hv)
 ag.run(ngen=5000,seed=0,nfeatures=400,mode='fixed') #ngen is the number of optimization runs and nfeatures is the number of marker genes we are interested in
 ```
 
@@ -37,7 +37,7 @@ pareto = ag.pareto
 
 We then pick one solution and filter its corresponding marker genes:<br/>
 ```python
-centroids_pareto = centroids_hv[pareto[len(pareto)-1]] #here we select the solution with min correlation
+centroids_pareto = centroids_hv.T[pareto[len(pareto)-1]] #select the solution with min correlation
 ``` 
 
 For deconvolution, bulk RNA samples are first normalized and filtered for the same marker genes. The deconvolution is then performed as follows:
@@ -46,7 +46,7 @@ regr_NuSVR = NuSVR(nu=0.5,C=0.5,kernel='linear')
 regr_NuSVR.fit(centroids_pareto, bulk_pareto)
 ``` 
 
-Later, regr_NuSVR.coef_[0] returns the proportions which should be normalized to sum to one. 
+Later, ```pythonregr_NuSVR.coef_[0]``` returns the proportions which should be normalized to sum to one. 
 
 ## Example Notebooks
 
