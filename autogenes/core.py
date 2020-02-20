@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import anndata
+#import anndata
 import dill as pickle
 import matplotlib.pyplot as plt
 
@@ -17,10 +17,10 @@ class AutoGenes:
     self.adata = None
     self.dataframe = None
 
-    if isinstance(data, anndata.AnnData):
-      self.adata = data
-      self.data = data.X
-    elif isinstance(data,pd.DataFrame):
+    #if isinstance(data, anndata.AnnData):
+      #self.adata = data
+      #self.data = data.X
+    if isinstance(data,pd.DataFrame):
       self.dataframe = data
       self.data = data.values
     elif isinstance(data, np.ndarray):
