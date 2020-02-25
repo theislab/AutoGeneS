@@ -48,10 +48,10 @@ regr_NuSVR = NuSVR(nu=0.5,C=0.5,kernel='linear')
 regr_NuSVR.fit(centroids_pareto, bulk_pareto)
 ``` 
 
-Later, ```regr_NuSVR.coef_[0]``` returns the proportions which should be normalized to sum to one. 
+Later, ```regr_NuSVR.coef_[0]``` returns the proportions that should be normalized to sum to one. 
 
 ## Example Notebooks
 
-Simple examples for how to call AutoGeneS can be find in "jupyter"
+Simple examples for how to call AutoGeneS in "jupyter"
 
-Bulk deconvolution of synthetic bulks using single-cell reference profiles can be find in "deconv_example"
+Bulk deconvolution of synthetic bulks using single-cell reference profiles in "deconv_example"
