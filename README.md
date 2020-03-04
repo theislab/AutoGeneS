@@ -37,7 +37,9 @@ ag.run(ngen=5000,seed=0,nfeatures=400,mode='fixed') #ngen is the number of optim
 The pareto front solutions are then accessible as follows:<br/>
 ```python
 pareto = ag.pareto
+ag.plot(size='large',weights=(1,-1))
 ``` 
+![Workflow of AutoGeneS](./docs/pareto.png)
 
 We then pick one solution and filter its corresponding marker genes:<br/>
 ```python
