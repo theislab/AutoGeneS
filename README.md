@@ -2,6 +2,8 @@
 
 AutoGeneS **automatically** extracts informative genes and reveals the cellular heterogeneity of bulk RNA samples. AutoGeneS requires no prior knowledge about marker genes and selects genes by **simultaneously optimizing multiple criteria**: minimizing the correlation and maximizing the distance between cell types. It can be applied to reference profiles from various sources like single-cell experiments or sorted cell populations.
 
+![Workflow of AutoGeneS](./docs/workflow.png)
+
 For a multi-objective optimization problem, there usually exists no single solution that simultaneously optimizes all objectives. In this case, the objective functions are said to be conflicting, and there exists a (possibly infinite) number of **Pareto-optimal solutions**. Pareto-(semi)optimal solutions are a set of all solutions that are not dominated by any other explored solution. Pareto-optimal solutions offer a set of equally good solutions from which to select, depending on the dataset
 
 ## Dependencies
@@ -35,7 +37,9 @@ ag.run(ngen=5000,seed=0,nfeatures=400,mode='fixed') #ngen is the number of optim
 The pareto front solutions are then accessible as follows:<br/>
 ```python
 pareto = ag.pareto
+ag.plot(size='large',weights=(1,-1))
 ``` 
+![Workflow of AutoGeneS](./docs/pareto.png)
 
 We then pick one solution and filter its corresponding marker genes:<br/>
 ```python
