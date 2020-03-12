@@ -19,8 +19,8 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = 'AutoGenes'
-copyright = '2020, Dr. Hananeh Aliee, Maxim Schmidt'
-author = 'Dr. Hananeh Aliee, Maxim Schmidt'
+copyright = '2020, Hananeh Aliee, Maxim Schmidt'
+author = 'Hananeh Aliee, Maxim Schmidt'
 
 
 # -- General configuration ---------------------------------------------------
