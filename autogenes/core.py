@@ -9,6 +9,7 @@ from .ga import GeneticAlgorithm
 from . import objectives as ga_objectives
 
 from sklearn.svm import NuSVR
+from deap import creator
 
 class AutoGenes:
 
@@ -299,7 +300,9 @@ class AutoGenes:
     pickle.dump(self, open(file, 'wb'))
 
   def load(file):
-    return pickle.load(open(file, 'rb'))
+    ag = pickle.load(open(file, 'rb'))
+    creator.FitnessGA.weights = ag.weights
+    return ag
 
   #
   # Helper

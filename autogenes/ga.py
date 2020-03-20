@@ -5,6 +5,11 @@ import hashlib
 from deap import creator, base, tools, algorithms
 from cachetools import LRUCache
 
+creator.create("FitnessGA", base.Fitness, weights=())
+creator.create("IndividualGA", np.ndarray, fitness=creator.FitnessGA)
+creator.IndividualGA.__eq__ = lambda self, other: np.array_equal(self,other)
+creator.IndividualGA.__hash__ = lambda self: int(hashlib.sha1(self.view(np.uint8)).hexdigest(),16)
+
 class GeneticAlgorithm:
 
   # Algorithm parameters
@@ -42,10 +47,7 @@ class GeneticAlgorithm:
     # DEAP is using the python random module
     random.seed(kwargs['seed'])
 
-    creator.create("FitnessGA", base.Fitness, weights=kwargs['weights'])
-    creator.create("IndividualGA", np.ndarray, fitness=creator.FitnessGA)
-    creator.IndividualGA.__eq__ = lambda self, other: np.array_equal(self,other)
-    creator.IndividualGA.__hash__ = lambda self: int(hashlib.sha1(self.view(np.uint8)).hexdigest(),16)
+    creator.FitnessGA.weights = kwargs['weights']
 
     self.tb = base.Toolbox()
     self.tb.register("evaluate", self.fitness)
