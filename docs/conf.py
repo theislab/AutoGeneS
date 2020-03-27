@@ -13,6 +13,8 @@ version = 'v1.0'
 
 # -- General configuration ---------------------------------------------------
 
+needs_sphinx = '2.0'
+
 extensions = [
     'sphinx_rtd_theme',
     'sphinx.ext.autodoc',
