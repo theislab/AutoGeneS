@@ -1,29 +1,37 @@
-AutoGenes
+AutoGeneS
 =========
 
-AutoGeneS automatically extracts informative genes and reveals the cellular heterogeneity of bulk RNA samples. AutoGeneS requires no prior knowledge about marker genes and selects genes by simultaneously optimizing multiple criteria: minimizing the correlation and maximizing the distance between cell types. It can be applied to reference profiles from various sources like single-cell experiments or sorted cell populations.
+AutoGeneS is a tool to automatically select informative genes from RNA-seq data [?]. Using this gene selection, it can be used to perform bulk deconvolution.
 
-For a multi-objective optimization problem, there usually exists no single solution that simultaneously optimizes all objectives. In this case, the objective functions are said to be conflicting, and there exists a (possibly infinite) number of Pareto-optimal solutions. Pareto-(semi)optimal solutions are a set of all solutions that are not dominated by any other explored solution. Pareto-optimal solutions offer a set of equally good solutions from which to select, depending on the dataset
+AutoGeneS requires no prior knowledge about marker genes and selects genes by simultaneously optimizing multiple criteria: minimizing the correlation and maximizing the distance between cell types [isn't this genes?]. It can be applied to reference profiles from various sources like single-cell experiments or sorted cell populations.
 
-.. toctree:: 
-   :caption: Contents
-   :maxdepth: 2
+It has been designed to be compatible with `scanpy`_. To report issues or view the code, please refer to our `github`_ page.
 
-   installation.rst
-   getting-started.rst
-
-.. toctree:: 
-   :caption: Tutorial
-   :maxdepth: 2
-
-   tutorial/run-autogenes.rst
-   tutorial/plotting.rst
-   tutorial/selection.rst
-   tutorial/bulk-deconvolution.rst
+.. _scanpy: https://github.com/theislab/scanpy
+.. _github: https://github.com/theislab/AutoGeneS
 
 .. toctree::
-   :caption: Misc
-   :maxdepth: 2
+  :maxdepth: 1
+  :hidden:
 
-   misc/background.rst
-   misc/references.rst
+  background 
+  getting_started 
+  api
+  references 
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+  :caption: Tutorials
+  
+  tutorials/preprocessing
+  tutorials/optimization
+  tutorials/plotting_selection
+  tutorials/deconvolution
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+  :caption: Applications
+  
+  applications/bulk_deconvolution

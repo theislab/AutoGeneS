@@ -13,16 +13,15 @@ creator.IndividualGA.__hash__ = lambda self: int(hashlib.sha1(self.view(np.uint8
 class GeneticAlgorithm:
 
   # Algorithm parameters
-  INIT_POPULATION_SIZE = 100
-  MU_PARAMETER = 100
-  LAMBDA_PARAMETER = 100
-  CROSSOVER_RATE = 0.7
-  MUTATION_RATE = 0.3
-  MUTATE_FLIP_RATE = 1E-3
-
-  CROSSOVER_THRES = 1000
-
-  IND_STANDARD_RATE = 0.1
+  PARAMETERS = {
+      'population_size': 100,
+      'offspring_size': 50,
+      'crossover_pb': 0.7,
+      'mutation_pb': 0.3,
+      'mutate_flip_pb': 1E-3,
+      'crossover_thres': 1000,
+      'ind_standard_pb': 0.1
+  }
 
   # Maximal number of individuals stored in cache
   MAX_CACHE_SIZE = 2E7
@@ -37,17 +36,32 @@ class GeneticAlgorithm:
     self.objectives_names = kwargs['objectives_names']
 
     self.ngen = kwargs['ngen']
-    MU_PARAMETER = kwargs['nMU']
     self.verbose = kwargs['verbose']
 
+    creator.FitnessGA.weights = kwargs['weights']
+
     self._ncx = 0
+
+    # Parameters
+    self.params = GeneticAlgorithm.PARAMETERS.copy()
+    for k in self.params:
+      if k in kwargs:
+        self.params[k] = kwargs[k]
 
     # Seed
     self.gen = np.random.RandomState(kwargs['seed'])
     # DEAP is using the python random module
     random.seed(kwargs['seed'])
 
-    creator.FitnessGA.weights = kwargs['weights']
+    if not hasattr(creator, 'FitnessGA'):
+      creator.create("FitnessGA", base.Fitness, weights=kwargs['weights'])
+    else:
+      creator.FitnessGA.weights = kwargs['weights']
+
+    if not hasattr(creator, 'IndividualGA'):
+      creator.create("IndividualGA", np.ndarray, fitness=creator.FitnessGA)
+      creator.IndividualGA.__eq__ = lambda self, other: np.array_equal(self,other)
+      creator.IndividualGA.__hash__ = lambda self: int(hashlib.sha1(self.view(np.uint8)).hexdigest(),16)
 
     self.tb = base.Toolbox()
     self.tb.register("evaluate", self.fitness)
@@ -66,7 +80,7 @@ class GeneticAlgorithm:
 
     # Initial population
     self.tb.register("population", tools.initRepeat, list, self.tb.individual)
-    self.pop = self.tb.population(n=GeneticAlgorithm.INIT_POPULATION_SIZE)
+    self.pop = self.tb.population(n=self.params['population_size'])
 
     # Pareto front
     self.hof = tools.ParetoFront(similar=np.array_equal)
@@ -105,10 +119,10 @@ class GeneticAlgorithm:
 
     try:
       self.pop, self.log = algorithms.eaMuPlusLambda(self.pop, self.tb,
-                                   mu = GeneticAlgorithm.MU_PARAMETER, 
-                                   lambda_ = GeneticAlgorithm.LAMBDA_PARAMETER,
-                                   cxpb = GeneticAlgorithm.CROSSOVER_RATE,
-                                   mutpb = GeneticAlgorithm.MUTATION_RATE,
+                                   mu = self.params['population_size'], 
+                                   lambda_ = self.params['offspring_size'],
+                                   cxpb = self.params['crossover_pb'],
+                                   mutpb = self.params['mutation_pb'],
                                    ngen = self.ngen - self.count_gen,
                                    stats = self.stats,
                                    verbose = self.verbose,
@@ -152,7 +166,7 @@ class GeneticAlgorithm:
     """
 
     ind = creator.IndividualGA(np.full(self.ind_size,False,dtype=bool))
-    rate = GeneticAlgorithm.IND_STANDARD_RATE
+    rate = self.params['ind_standard_pb']
     nfeat = self.min_nfeat + self.gen.binomial(self.ind_size-self.min_nfeat,rate)
     ind[:nfeat] = True
     self.gen.shuffle(ind)
@@ -178,7 +192,7 @@ class GeneticAlgorithm:
     """
 
     self._ncx += 1
-    if self._ncx < GeneticAlgorithm.CROSSOVER_THRES :
+    if self._ncx < self.params['crossover_thres']:
       self.cross_and_or(ind1, ind2)
     else:
       self.swap_block(ind1, ind2)
@@ -200,7 +214,7 @@ class GeneticAlgorithm:
 
     # Calculate number of bits to flip
     # Later, n_flip 1s and n_flip 0s are flipped
-    n_flip = self.gen.binomial(self.ind_size, GeneticAlgorithm.MUTATE_FLIP_RATE)
+    n_flip = self.gen.binomial(self.ind_size, self.params['mutate_flip_pb'])
     n_flip = int((n_flip-n_flip%2)/2)
     n_flip = min(self.nfeatures,self.ind_size-self.nfeatures,n_flip)
 
@@ -251,7 +265,7 @@ class GeneticAlgorithm:
 
   def n_bitflip(self, ind):
 
-    n_flip = self.gen.binomial(self.ind_size, GeneticAlgorithm.MUTATE_FLIP_RATE)
+    n_flip = self.gen.binomial(self.ind_size, self.params['mutate_flip_pb'])
 
     # generate bitmask
     bm = np.array([False]*self.ind_size)
