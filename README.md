@@ -12,7 +12,7 @@ For a multi-objective optimization problem, there usually exists no single solut
 ```pip install --user autogenes```<br/>
 2. <br/>
 ```git clone https://github.com/theislab/AutoGeneS```<br/>
-```pip install --user dist/autogenes-0.9.1-py3-none-any.whl```<br/>
+```pip install --user dist/autogenes-1.0-py3-none-any.whl```<br/>
 
 ## Documentation
 
