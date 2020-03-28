@@ -2,3 +2,6 @@ __pycache__
 .ipynb_checkpoints
 build
 AutoGenes.egg-info
+.*
+!/.gitignore
+git rm --cached setup.py

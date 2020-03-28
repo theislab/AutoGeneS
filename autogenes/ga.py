@@ -15,7 +15,7 @@ class GeneticAlgorithm:
   # Algorithm parameters
   PARAMETERS = {
       'population_size': 100,
-      'offspring_size': 50,
+      'offspring_size': 100,
       'crossover_pb': 0.7,
       'mutation_pb': 0.3,
       'mutate_flip_pb': 1E-3,

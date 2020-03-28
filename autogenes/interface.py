@@ -261,12 +261,20 @@ class Interface:
     X,y = self.__model_input(bulk_data, bulk_genes, selection)
 
     if model == "nusvr":
-      model = NuSVR(nu=0.5,C=0.5,kernel='linear')
       if y.shape[1] == 1:
         y = np.ravel(y)
-      model.fit(X, y)
-      self.model = model
-      return model.coef_
+        model = NuSVR(nu=0.5,C=0.5,kernel='linear')
+        model.fit(X, y)
+        self.model = model
+        return model.coef_
+      else:
+        res = np.zeros((y.shape[1],X.shape[1]))
+        for i in range(y.shape[1]):
+          model = NuSVR(nu=0.5,C=0.5,kernel='linear')
+          model.fit(X, y[:,i])
+          self.model = model
+          res[i] = model.coef_
+        return res
 
     if model == "nnls":
       if y.ndim == 1:
