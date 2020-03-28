@@ -15,6 +15,10 @@ For a multi-objective optimization problem, there usually exists no single solut
 ```git clone https://github.com/theislab/AutoGeneS```<br/>
 ```pip install --user dist/autogenes-1.0-py3-none-any.whl```<br/>
 
+## Example
+
+[Example on pseudo bulks](https://github.com/theislab/AutoGeneS/blob/master/deconv_example/bulkDeconvolution_using_singleCellReferenceProfiles.ipynb)
+
 ## Documentation
 
 [Documentation](https://autogenes.readthedocs.io/en/latest/)
