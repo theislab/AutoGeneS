@@ -19,7 +19,7 @@ For a multi-objective optimization problem, there usually exists no single solut
 
 [Documentation](https://autogenes.readthedocs.io/en/latest/)
 
-[Getting Started](https://autogenes.readthedocs.io/en/latest/getting-started.html)
+[Getting Started](https://autogenes.readthedocs.io/en/latest/getting_started.html)
 
 ## Dependencies
 
