@@ -17,7 +17,7 @@ It is compatible with `scanpy`_. To report issues or view the code, please refer
   api
   references 
 
-##.. toctree::
+.. toctree::
   :maxdepth: 1
   :hidden:
   :caption: Tutorials
@@ -27,7 +27,7 @@ It is compatible with `scanpy`_. To report issues or view the code, please refer
   tutorials/plotting_selection
   tutorials/deconvolution
 
-##.. toctree::
+.. toctree::
   :maxdepth: 1
   :hidden:
   :caption: Applications
