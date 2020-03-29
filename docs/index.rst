@@ -16,20 +16,3 @@ It is compatible with `scanpy`_. To report issues or view the code, please refer
   getting_started 
   api
   references 
-
-.. toctree::
-  :maxdepth: 1
-  :hidden:
-  :caption: Tutorials
-  
-  tutorials/preprocessing
-  tutorials/optimization
-  tutorials/plotting_selection
-  tutorials/deconvolution
-
-.. toctree::
-  :maxdepth: 1
-  :hidden:
-  :caption: Applications
-  
-  applications/bulk_deconvolution
