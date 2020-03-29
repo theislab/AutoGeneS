@@ -18,4 +18,15 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
+    install_requires=[
+      'pandas>=0.25.1',
+      'anndata>=0.6.22.post1',
+      'numpy>=1.17.2'
+      'dill>=0.3.1.1'
+      'deap>=1.3.0'
+      'scipy>=1.3.1'
+      'cachetools>=3.1.1'
+      'scikit-learn>=0.21.3'
+      'matplotlib>=3.0.3'
+    ]
 )
