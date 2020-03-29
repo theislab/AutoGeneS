@@ -166,7 +166,7 @@ class Interface:
 
   def plot(self, **kwargs):
     """
-    plot(weights = None, index = None, close_to = None)
+    plot(objectives = (0,1), weights = None, index = None, close_to = None)
     
     Plots objective values of solutions
 
@@ -174,8 +174,10 @@ class Interface:
 
     Parameters
     ----------
+    objectives : `(int,int)`, optional (default: `(0,1)`)
+      The objectives to be plotted. Contains indices of objectives. The first index refers to the objective that is plotted on the x-axis. For example, `(2,1)` will plot the third objective on the x-axis and the second on the y-axis.
     weights : `(int, ...)`, optional
-      Weights with which to weight the objective values. For example, `(-1,2)` will minimize the first objective and maximize the the second (with more weight).
+      Weights with which to weight the objective values. For example, `(-1,2)` will minimize the first objective and maximize the the second (with higher weight).
     index : `int`, `(int,int)`, optional
       If one int is passed, return `pareto[index]`
       If two ints are passed, the first is an objective (`0` for the first). The second is the nth element if the solutions have been sorted by the objective in ascending order. For example, `(0,1)` will return the solution that has the second-lowest value in the first objective. `(1,-1)` will return the solution with the highest value in the second objective.
