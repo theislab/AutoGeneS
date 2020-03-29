@@ -10,6 +10,7 @@ setuptools.setup(
     author_email="author@helmholtz-muenchen.de",
     description="Automatic Gene Selection",
     long_description=long_description,
+    long_description_content_type="text/markdown",
     url="https://github.com/theislab/AutoGeneS",
     packages=setuptools.find_packages(),
     classifiers=[
