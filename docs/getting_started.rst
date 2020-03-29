@@ -18,17 +18,17 @@ Import the libraries and read the reference data and bulk samples::
   bulk_data = pd.read_csv('bulk_data.csv').transpose()
   adata = sc.read(address_to_your_sc_data, cache=True).transpose()
 
-Before you can use AutoGeneS, it needs to be initialized with the referebce data. At this step, preprocessing happens (see the documentation)::
+Before you can use AutoGeneS, it needs to be initialized with the reference data (see the API)::
 
   ag.init(adata,use_highly_variable=True,celltype_key='cellType')
 
-If the data is given as anndata, ag.init automatically measures the centroid of cell types by means of averaging the gene expression of their cells.
+If the data is given as anndata, ag.init automatically measures the centroids of cell types by means of averaging the gene expression of their cells.
 
 In the next step, we run the optimizer::
 
   ag.optimize(ngen=5000,nfeatures=400,seed=0,mode='fixed')
 
-Here, run the optimizer for 5K generations asking for 400 genes. During this optimization process, a set of solutions is generated. Each solution is a set of 400 genes and is evaluated based on objectives that can be passed to `optimize`. In our examples, it uses the default objectives `correlation` and `distance`.
+Here, we run the optimizer for 5K generations asking for 400 genes. During this optimization process, a set of solutions is generated. Each solution is a set of 400 genes and is evaluated based on objectives that can be passed to `optimize`. In our examples, it uses the default objectives `correlation` and `distance`.
 
 All the non-dominated solutions can be visualized using the plot function::
   
