@@ -430,7 +430,10 @@ class Interface:
       if n_intersect_genes < sum(selection):
         warnings.warn("Some of the selected genes don't appear in the bulk data and will be ignored")
 
-      X = self.data.T[intersect_genes]
+      if self._adata:
+        X = self._adata.T[intersect_genes]
+      else:
+        X = self.data.T[intersect_genes]
 
       # Note: Genes in bulk may be in different order and of different size!
       # Cannot simply apply bitmask!
@@ -447,10 +450,13 @@ class Interface:
     else:
 
       bulk_dim = bulk_data.shape[1]
-      if bulk_dim != self.data.shape[1]:
+      if bulk_dim != len(selection): #self.data.shape[1]
         raise ValueError("Bulk data has wrong shape")
 
-      X = self.data.T[selection]
+      if self._adata:
+        X = self._adata.T[selection]
+      else:
+        X = self.data.T[selection]
       y = bulk_data.T[selection]
 
     return X,y
