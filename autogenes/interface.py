@@ -431,7 +431,7 @@ class Interface:
         warnings.warn("Some of the selected genes don't appear in the bulk data and will be ignored")
 
       if self._adata:
-        X = self._adata.T[intersect_genes]
+        X = self._adata.X.T[intersect_genes]
       else:
         X = self.data.T[intersect_genes]
 
@@ -454,7 +454,7 @@ class Interface:
         raise ValueError("Bulk data has wrong shape")
 
       if self._adata:
-        X = self._adata.T[selection]
+        X = self._adata.X.T[selection]
       else:
         X = self.data.T[selection]
       y = bulk_data.T[selection]
