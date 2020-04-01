@@ -27,16 +27,16 @@ For a multi-objective optimization problem, there usually exists no single solut
 
 ## Dependencies
 
-* python >=3.6
+* python>=3.6
 * pandas>=0.25.1
 * anndata>=0.6.22.post1
 * numpy>=1.17.2
 * dill>=0.3.1.1
 * deap>=1.3.0
-* scipy=1.3
+* scipy>=1.3
 * cachetools>=3.1.1
 * scikit-learn>=0.21.3
-* matplotlib==3.0.*
+* matplotlib>=3.0
 
 ## Citation
 
