@@ -13,7 +13,7 @@ For a multi-objective optimization problem, there usually exists no single solut
 
 2. Development Version (latest version on github) <br/>
 ```git clone https://github.com/theislab/AutoGeneS```<br/>
-```pip install --user dist/autogenes-1.0-py3-none-any.whl```<br/>
+```pip install --user dist/autogenes-1.0.2-py3-none-any.whl```<br/>
 
 ## Example
 
