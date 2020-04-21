@@ -410,8 +410,8 @@ class Interface:
       raise ValueError("More than 1 cell types expected")
 
     result = anndata.AnnData(sc_means)
-    results.var = adata.var.copy()
-    results.var_names = adata.var_names
+    result.var = adata.var.copy()
+    result.var_names = adata.var_names
 
     return result
 
