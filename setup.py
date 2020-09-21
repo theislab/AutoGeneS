@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="autogenes",
-    version="1.0.3",
+    version="1.0.4",
     author="Hananeh Aliee, Maxim Schmidt",
     author_email="hananeh.aliee@helmholtz-muenchen.de",
     description="Automatic Gene Selection for Bulk Deconvolution",

@@ -10,6 +10,7 @@ import dill as pickle
 from sklearn.svm import NuSVR
 from sklearn import linear_model
 from scipy.optimize import nnls
+from scipy import sparse 
 
 class Interface:
 
@@ -263,16 +264,50 @@ class Interface:
     X,y = self.__model_input(bulk_data, bulk_genes, selection)
 
     if model == "nusvr":
+      nu = 0.5
+      C = 0.5
+      kernel = 'linear'
+      degree=3
+      gamma='scale'
+      coef0=0.0
+      shrinking=True
+      tol=1e-3
+      cache_size=200
+      verbose=False
+      max_iter=-1
+      if 'nu' in kwargs:
+        nu=kwargs['nu']
+      if 'C' in kwargs:
+        C=kwargs['C']
+      if 'kernel' in kwargs:
+        kernel=kwargs['kernel']
+      if 'degree' in kwargs:
+        degree=kwargs['degree']
+      if 'gamma' in kwargs:
+        gamma=kwargs['gamma']
+      if 'coef0' in kwargs:
+        coef0=kwargs['coef0']
+      if 'shrinking' in kwargs:
+        shrinking=kwargs['shrinking']
+      if 'tol' in kwargs:
+        tol=kwargs['tol']
+      if 'cache_size' in kwargs:
+        cache_size=kwargs['cache_size']
+      if 'verbose' in kwargs:
+        verbose=kwargs['verbose']
+      if 'max_iter' in kwargs:
+        max_iter=kwargs['max_iter']
+        
       if y.shape[1] == 1:
         y = np.ravel(y)
-        model = NuSVR(nu=0.5,C=0.5,kernel='linear')
+        model = NuSVR(nu=nu,C=C,kernel=kernel,degree=degree,gamma=gamma,coef0=coef0,shrinking=shrinking,tol=tol,cache_size=cache_size,verbose=verbose,max_iter=max_iter)
         model.fit(X, y)
         self.model = model
         return model.coef_
       else:
         res = np.zeros((y.shape[1],X.shape[1]))
         for i in range(y.shape[1]):
-          model = NuSVR(nu=0.5,C=0.5,kernel='linear')
+          model = NuSVR(nu=nu,C=C,kernel=kernel,degree=degree,gamma=gamma,coef0=coef0,shrinking=shrinking,tol=tol,cache_size=cache_size,verbose=verbose,max_iter=max_iter)
           model.fit(X, y[:,i])
           self.model = model
           res[i] = model.coef_
@@ -402,9 +437,16 @@ class Interface:
 
     if celltype_key not in adata.obs:
       raise ValueError("Key not found")
-    sc_means = pd.DataFrame(data=adata.X, columns=adata.var_names)
-    sc_means['cell_types'] = pd.Series(data=adata.obs[celltype_key].values,index=sc_means.index)
-    sc_means = sc_means.groupby('cell_types').mean()
+    
+    if not sparse.issparse(adata.X):
+      sc_means = pd.DataFrame(data=adata.X, columns=adata.var_names)
+      sc_means['cell_types'] = pd.Series(data=adata.obs[celltype_key].values,index=sc_means.index)
+      sc_means = sc_means.groupby('cell_types').mean()
+    else:
+      sc_means = pd.DataFrame(index=adata.var_names)
+      for cell in set(adata.obs[celltype_key]):
+        sc_means[cell] = sparse.csr_matrix.mean(adata[adata.obs[celltype_key]==cell].X,axis=0).tolist()[0]
+      sc_means = sc_means.T
 
     if len(sc_means.index) == 1:
       raise ValueError("More than 1 cell types expected")
