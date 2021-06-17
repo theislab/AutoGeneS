@@ -40,4 +40,4 @@ For a multi-objective optimization problem, there usually exists no single solut
 
 ## Citation
 
-[Aliee, Hananeh and Theis, Fabian, AutoGeneS: Automatic gene selection using multi-objective optimization for RNA-seq deconvolution](https://www.biorxiv.org/content/early/2020/02/23/2020.02.21.940650)
+[Aliee, Hananeh and Theis, Fabian, AutoGeneS: Automatic gene selection using multi-objective optimization for RNA-seq deconvolution](https://www.sciencedirect.com/science/article/pii/S2405471221001927)
