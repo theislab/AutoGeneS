@@ -28,6 +28,6 @@ setup(
       'scipy>=1.3',
       'cachetools>=3.1.1',
       'scikit-learn>=0.21.3',
-      'matplotlib>=3.0.*'
+      'matplotlib>=3.0.0'
     ]
 )
